@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Home from "./components/Home";
+import Projects from "./components/Projects";
+import Skills from "./components/Skills";
+import Navbar from "./components/Navbar";
+import Contact from "./components/Contact";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleTheme = () => setDarkMode(!darkMode);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={darkMode ? "bg-dark text-light" : "bg-light text-dark"} style={{ minHeight: "100vh" }}>
+      <Navbar /> 
+      <div className="container py-3">
+        <button onClick={toggleTheme} className="btn btn-outline-secondary mb-3 float-end">
+          {darkMode ? "Light Mode" : "Dark Mode"}
+        </button>
+        <Home /> 
+        <Skills darkMode={darkMode} />
+        <Projects darkMode={darkMode} />
+        <Contact />        
+      </div>
     </div>
   );
 }
